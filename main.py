@@ -144,7 +144,7 @@ class DBOperations:
       identifier_field = input("Enter the identifier field name: ")
       identifier_value = input("Enter the identifier value: ")
       self.get_connection()
-      # substition via the .replace() method is used to modify the text in the string to be included in the execution
+      # substitution via the .replace() method is used to modify the text in the string to be included in the execution
       sql_update_data_after_substitution = (self.sql_update_data.replace("SUBSTITUTE_TABLE_NAME", table_name).replace("SUBSTITUTE_FIELD_NAME", field_name).replace("SUBSTITUTE_IDENTIFIER_FIELD", identifier_field))
       self.cur.execute(sql_update_data_after_substitution, tuple([str(new_value),str(identifier_value)]))
       
