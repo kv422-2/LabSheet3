@@ -20,7 +20,7 @@ class DBOperations:
   sql_search = "SELECT * FROM Flights where FlightNumber = ?"
   sql_update_data = "UPDATE SUBSTITUTE_TABLE_NAME SET SUBSTITUTE_FIELD_NAME = ? WHERE SUBSTITUTE_IDENTIFIER_FIELD = ?"
   sql_delete_data = "DELETE FROM Flights WHERE FlightNumber = ?"
-  sql_search_data_by_pilot = 'SELECT * FROM Flights WHERE PilotNumber = ?'
+  sql_search_data_by_pilot = 'SELECT * FROM Flights WHERE PilotNumber = ? or CopilotNumber = ?'
   sql_select_all_destinations = 'SELECT * FROM Destinations'
   sql_search_flight_data = 'SELECT * FROM SUBSTITUTE_TABLE_NAME WHERE SUBSTITUTE_FIELD_NAME = ?'
 
@@ -212,7 +212,7 @@ class DBOperations:
     try:
       self.get_connection()
       identifier_value = input("Enter Your Pilot Number: ")
-      self.cur.execute(self.sql_search_data_by_pilot,tuple([str(identifier_value)]))
+      self.cur.execute(self.sql_search_data_by_pilot,tuple([str(identifier_value),str(identifier_value)]))
       result = self.cur.fetchall()
       print("Here's your schedule: ")
       self.print_query_result_multiple(result,["FlightNumber","FlightDepartureTime","FlightStatus","PilotNumber","CopilotNumber","FlightOrigin","FlightDestination"])
