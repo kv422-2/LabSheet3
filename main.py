@@ -167,7 +167,8 @@ class DBOperations:
       self.get_connection()
       identifier_value = input("Enter the FlightNumber to be deleted: ")
       self.cur.execute(self.sql_delete_data, tuple([str(identifier_value)]))
-      
+
+      # if a row is affected, it is noted, otherwise a message is shown
       if self.cur.rowcount != 0:
         print(str(self.cur.rowcount) + "Row(s) affected.")
         self.conn.commit()
@@ -192,9 +193,11 @@ class DBOperations:
       identifier_field = 'FlightNumber'
       identifier_value = input("Enter the FlightNumber for Assignment value: ")
       self.get_connection()
+      # substitution via the .replace() method is used to modify the text in the string to be included in the execution
       sql_update_data_after_substitution = (self.sql_update_data.replace("SUBSTITUTE_TABLE_NAME", table_name).replace("SUBSTITUTE_FIELD_NAME", field_name).replace("SUBSTITUTE_IDENTIFIER_FIELD", identifier_field))
       self.cur.execute(sql_update_data_after_substitution, tuple([str(new_value),str(identifier_value)]))
       
+      # if a row is affected, it is noted, otherwise a message is shown
       if self.cur.rowcount != 0:
         print(str(self.cur.rowcount) + "Row(s) affected.")
         self.conn.commit()
@@ -245,9 +248,11 @@ class DBOperations:
       identifier_field = 'AirportIdentifier'
       identifier_value = input("Enter the AirportIdentifier you'd like to update: ")
       self.get_connection()
+      # substitution via the .replace() method is used to modify the text in the string to be included in the execution
       sql_update_data_after_substitution = (self.sql_update_data.replace("SUBSTITUTE_TABLE_NAME", table_name).replace("SUBSTITUTE_FIELD_NAME", field_name).replace("SUBSTITUTE_IDENTIFIER_FIELD", identifier_field))
       self.cur.execute(sql_update_data_after_substitution, tuple([str(new_value),str(identifier_value)]))
       
+      # if a row is affected, it is noted, otherwise a message is shown
       if self.cur.rowcount != 0:
         print(str(self.cur.rowcount) + "Row(s) affected.")
         self.conn.commit()
@@ -289,7 +294,7 @@ class FlightInfo:
     self.flightOrigin = ''
     self.flightDestination = ''
     self.status = ''
-
+  # Mutator methods
   def set_flight_id(self, flightID):
     self.flightID = flightID
 
@@ -310,7 +315,7 @@ class FlightInfo:
 
   def set_flight_status(self, status):
     self.status = status
-
+  # Accessor Methods
   def get_flight_id(self):
     return self.flightID
 
